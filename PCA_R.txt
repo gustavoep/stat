@@ -1,0 +1,9 @@
+library(readxl)
+library(factoextra)
+
+EPAGRI <- read_excel("EPAGRI.xlsx")
+pca_corr <- prcomp(EPAGRI[2:14], center = TRUE, scale = TRUE)
+fviz_pca_biplot(pca_corr, label="var", habillage=EPAGRI$prof, addEllipses=TRUE, ellipse.level=0.95)
+fviz_contrib(pca_corr, choice = "var", axes = 1)
+fviz_eig(pca_corr, addlabels = TRUE)
+fviz_pca_biplot(pca_corr, geom.ind = "point", fill.ind = EPAGRI$...1, col.ind = "black",pointshape = 21, pointsize = 2, palette = "jco",addEllipses = TRUE, alpha.var ="contrib", col.var = "contrib", gradient.cols = "OrRd")
